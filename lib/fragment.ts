@@ -1,18 +1,25 @@
 /**
+ * Registory of DocumentFragments corresponding to each template.
+ */
+const registory = new WeakMap<TemplateStringsArray, DocumentFragment>();
+
+/**
  * Create and reuse a documentfragment from an HTML string.
  */
 export function fragment(strings: TemplateStringsArray, ...values: string[]): DocumentFragment {
-    if ((strings as any).fragment) {
-        // If this fragment has a cache, clone and return it.
-        return (strings as any).fragment.cloneNode();
+    const cache = registory.get(strings);
+    if (cache != null){
+        return cache.cloneNode(true) as DocumentFragment;
     }
     let html = '';
     const l = strings.length;
-    for (let i = 0; i < l; i++) {
-        html += strings[i];
-        html += values[i];
+    if (l > 0){
+        html += strings[0];
     }
-    html += strings[l];
+    for (let i = 1; i < l; i++) {
+        html += values[i-1];
+        html += strings[i];
+    }
 
     // Parse HTML using insertAdjacentHTML.
     const div = document.createElement('div');
@@ -21,7 +28,6 @@ export function fragment(strings: TemplateStringsArray, ...values: string[]): Do
     while (div.firstChild) {
         f.appendChild(div.firstChild);
     }
-
-    (strings as any).fragment = f;
-    return f.cloneNode() as DocumentFragment;
+    registory.set(strings, f);
+    return f.cloneNode(true) as DocumentFragment;
 }

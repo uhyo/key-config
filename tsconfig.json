@@ -6,11 +6,11 @@
       "es2017",
       "dom.iterable"
     ],
-    "module": "es2015",
+    "module": "commonjs",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "removeComments": false,
-    "sourceMap": false,
+    "sourceMap": true,
     "target": "es2017",
     "noFallthroughCasesInSwitch": true,
     "strict": true

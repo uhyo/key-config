@@ -1,20 +1,22 @@
 // Karma configuration
 // Generated on Sun Dec 24 2017 00:40:10 GMT+0900 (JST)
+const path = require('path');
 
 module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: './',
 
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai', 'karma-typescript'],
+    frameworks: ['mocha', 'chai', 'snapshot', 'mocha-snapshot', 'karma-typescript'],
 
 
     // list of files / patterns to load in the browser
     files: [
+      '**/__snapshots__/**/*.md',
       'lib/**/*.ts'
     ],
 
@@ -27,6 +29,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      '**/__snapshots__/**/*.md': 'snapshot',
       '**/*.ts': 'karma-typescript',
     },
 
@@ -34,7 +37,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'karma-typescript'],
+    reporters: ['mocha', 'karma-typescript'],
 
 
     // web server port
@@ -65,6 +68,26 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    // karma-snapshot
+    snapshot: {
+      update: !!process.env.UPDATE,
+      prune: !!process.env.PRUNE,
+      checkSourceFile: true,
+      pathResolver,
+    },
+    // karma-mocha-reporter
+    mochaReporter: {
+      showDiff: true,
+    },
+    // karma-typescript
+    karmaTypescriptConfig: {
+      tsconfig: './tsconfig.json',
+    },
   })
+};
+
+function pathResolver(basePath, suiteName){
+  return path.join(basePath, "__snapshots__", suiteName + ".md");
 }

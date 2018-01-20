@@ -28,7 +28,7 @@ export class OneKey extends HTMLElement {
             </div>
         `);
 
-        this.keyText = f.querySelector('.key-text');
+        this.keyText = f.querySelector('.key-text') as HTMLElement;
     }
     get key(): Readonly<IKey> {
         return this._key;
