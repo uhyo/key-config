@@ -1,4 +1,7 @@
 import {
+    expect,
+} from 'chai';
+import {
     keyStringify,
 } from '../key';
 
@@ -11,7 +14,7 @@ describe('IKey', ()=>{
             metaKey: false,
             shiftKey: false,
         });
-        expect(res).toBe('H');
+        expect(res).to.equal('H');
     });
     it('stringifies a shift-key object', ()=>{
         const res = keyStringify({
@@ -21,7 +24,7 @@ describe('IKey', ()=>{
             metaKey: false,
             shiftKey: true,
         });
-        expect(res).toBe('Shift+RightArrow');
+        expect(res).to.equal('Shift+RightArrow');
     });
     it('stringifies a ctrl-key object', ()=>{
         const res = keyStringify({
@@ -31,7 +34,7 @@ describe('IKey', ()=>{
             metaKey: false,
             shiftKey: false,
         });
-        expect(res).toBe('Ctrl+3');
+        expect(res).to.equal('Ctrl+3');
     });
     it('stringifies an alt-key object', ()=>{
         const res = keyStringify({
@@ -41,7 +44,7 @@ describe('IKey', ()=>{
             metaKey: false,
             shiftKey: false,
         });
-        expect(res).toBe('Alt+Y');
+        expect(res).to.equal('Alt+Y');
     });
     it('stringifies a meta-key object', ()=>{
         const res = keyStringify({
@@ -51,7 +54,7 @@ describe('IKey', ()=>{
             metaKey: true,
             shiftKey: false,
         });
-        expect(res).toBe('Meta+P');
+        expect(res).to.equal('Meta+P');
     });
     it('stringifies a combined key object', ()=>{
         const res = keyStringify({
@@ -61,6 +64,6 @@ describe('IKey', ()=>{
             metaKey: true,
             shiftKey: true,
         });
-        expect(res).toBe('Meta+Ctrl+Alt+Shift+A');
+        expect(res).to.equal('Meta+Ctrl+Alt+Shift+A');
     });
 });
