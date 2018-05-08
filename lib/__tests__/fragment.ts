@@ -1,19 +1,12 @@
-import {
-    expect,
-    use,
-} from 'chai';
-import {
-    matchSnapshot,
-} from 'chai-karma-snapshot';
+import { expect, use } from 'chai';
+import { matchSnapshot } from 'chai-karma-snapshot';
 
-import {
-    fragment,
-} from '../fragment';
+import { fragment } from '../fragment';
 
 use(matchSnapshot);
 
-describe('fragment', ()=>{
-    it('generates a correct HTML tree', ()=>{
+describe('fragment', () => {
+    it('generates a correct HTML tree', () => {
         const tree = fragment`
             <div><p>Hey!</p></div>
         `;
@@ -21,7 +14,7 @@ describe('fragment', ()=>{
         expect(tree.nodeType).to.be.equal(Node.DOCUMENT_FRAGMENT_NODE);
         expect(wrap(tree)).to.matchSnapshot();
     });
-    it('can handle placeholders', ()=>{
+    it('can handle placeholders', () => {
         const foo = 'foo';
         const bar = 'bar';
         const tree = fragment`
@@ -32,7 +25,7 @@ describe('fragment', ()=>{
 
         expect(wrap(tree)).to.matchSnapshot();
     });
-    it('Generates new DocumentFragments for same input', ()=>{
+    it('Generates new DocumentFragments for same input', () => {
         const tree1 = fragment`
             <div><p>Hey!3</p></div>
         `;

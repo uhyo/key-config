@@ -69,7 +69,11 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity,
-
+    // karma-coverage
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/',
+    },
     // karma-snapshot
     snapshot: {
       update: !!process.env.UPDATE,
@@ -83,6 +87,9 @@ module.exports = function(config) {
     },
     // karma-typescript
     karmaTypescriptConfig: {
+      coverageOptions: {
+        exclude: /__tests__/,
+      },
       tsconfig: './tsconfig.json',
     },
   })

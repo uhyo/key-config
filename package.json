@@ -8,13 +8,9 @@
     "email": "uhyo@uhy.ooo",
     "url": ""
   },
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "main": "lib/index.js",
-  "keywords": [
-    "keyconfig"
-  ],
+  "keywords": ["keyconfig"],
   "devDependencies": {
     "@types/chai": "^4.1.3",
     "@types/mocha": "^5.2.0",
@@ -31,12 +27,13 @@
     "karma": "^2.0.2",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.2",
     "karma-mocha": "^1.3.0",
     "karma-mocha-reporter": "^2.2.5",
     "karma-mocha-snapshot": "^0.2.1",
     "karma-snapshot": "^0.6.0",
     "karma-typescript": "^3.0.12",
-    "lint-staged": "^7.0.5",
+    "lint-staged": "^7.1.0",
     "merge2": "^1.2.2",
     "mocha": "^5.1.1",
     "nsp": "^3.2.1",
@@ -53,22 +50,14 @@
     "prepublish": "nsp check",
     "precommit": "lint-staged",
     "build": "gulp default",
+    "watch": "gulp watch",
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run"
   },
   "lint-staged": {
-    "*.ts": [
-      "tslint --fix",
-      "git add"
-    ],
-    "*.tsx": [
-      "tslint --fix",
-      "git add"
-    ],
-    "*.json": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.ts": ["tslint --fix", "git add"],
+    "*.tsx": ["tslint --fix", "git add"],
+    "*.json": ["prettier --write", "git add"]
   },
   "repository": "uhyo/key-config",
   "license": "MIT"
