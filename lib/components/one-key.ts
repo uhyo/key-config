@@ -1,10 +1,5 @@
-import {
-    fragment,
-} from '../fragment';
-import {
-    IKey,
-    keyStringify,
-} from '../key';
+import { fragment } from '../fragment';
+import { IKey, keyStringify } from '../key';
 
 /**
  * Config of one key.
@@ -15,9 +10,16 @@ export class OneKey extends HTMLElement {
     static get observedAttributes() {
         return ['label'];
     }
-    constructor(){
+    constructor() {
         super();
 
+        this._key = {
+            altKey: false,
+            ctrlKey: false,
+            key: '',
+            metaKey: false,
+            shiftKey: false,
+        };
         const f = this.attachShadow({
             mode: 'open',
         });
@@ -36,7 +38,7 @@ export class OneKey extends HTMLElement {
     set key(k: Readonly<IKey>) {
         // shallow-copy
         this._key = {
-            ... k,
+            ...k,
         };
         // Rewrite the label.
         this.keyText.textContent = keyStringify(k);

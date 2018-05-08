@@ -74,7 +74,7 @@ module.exports = function(config) {
     snapshot: {
       update: !!process.env.UPDATE,
       prune: !!process.env.PRUNE,
-      checkSourceFile: true,
+      checkSourceFile: false,
       pathResolver,
     },
     // karma-mocha-reporter
