@@ -62,8 +62,23 @@ export class OneKey extends HTMLElement {
                     // Move back to the waiting state.
                     this.waiting = false;
                     ke.preventDefault();
-                    // update my key.
-                    this.key = getKey(ke);
+                    // Generate an IKey object for this event.
+                    const key = getKey(ke);
+                    // Dispatch an event.
+                    const evSuccess = this.dispatchEvent(
+                        new CustomEvent('key-change', {
+                            bubbles: true,
+                            cancelable: true,
+                            detail: key,
+                        }),
+                    );
+                    if (evSuccess) {
+                        // update my key.
+                        this.key = key;
+                    } else {
+                        // fire setter.
+                        this.key = this.key;
+                    }
 
                     this.ownerDocument.removeEventListener(
                         'keydown',
@@ -103,4 +118,24 @@ export class OneKey extends HTMLElement {
     set label(value: string) {
         this.setAttribute('label', value);
     }
+}
+
+// XXX this is a copy of lib.dom.d.ts
+// tslint:disable-next-line:interface-name
+export interface OneKey {
+    addEventListener<K extends keyof HTMLElementEventMap>(
+        type: K,
+        listener: (this: OneKey, ev: HTMLElementEventMap[K]) => any,
+        options?: boolean | AddEventListenerOptions,
+    ): void;
+    addEventListener(
+        type: 'key-change',
+        listener: (this: OneKey, ev: CustomEvent<IKey>) => any,
+        options?: boolean | AddEventListenerOptions,
+    ): void;
+    addEventListener(
+        type: string,
+        listener: EventListenerOrEventListenerObject,
+        options?: boolean | AddEventListenerOptions,
+    ): void;
 }

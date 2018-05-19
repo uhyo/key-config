@@ -1,6 +1,7 @@
 import { expect, use } from 'chai';
 import { matchSnapshot } from 'chai-karma-snapshot';
 
+import { IKey } from '../../key';
 import { onekey } from '../name';
 import { OneKey } from '../one-key';
 import '../register';
@@ -111,6 +112,82 @@ describe('one-key', () => {
         });
 
         expect(component.shadowRoot!.innerHTML).to.matchSnapshot();
+
+        document.body.removeChild(component);
+    });
+    it('key-change event should be called', () => {
+        const component = new OneKey();
+
+        document.body.appendChild(component);
+
+        let key: any;
+
+        // add change listener.
+        component.addEventListener(
+            'key-change',
+            (e: CustomEvent<IKey>) => {
+                key = e.detail;
+            },
+            false,
+        );
+
+        // simulate click.
+        const ev = new MouseEvent('click');
+        component.dispatchEvent(ev);
+
+        // simluate Shift+S key.
+        const keyev = new KeyboardEvent('keydown', {
+            bubbles: true,
+            cancelable: true,
+            key: 'S',
+            shiftKey: true,
+        });
+
+        component.dispatchEvent(keyev);
+
+        // change ovent should have been dispached.
+        expect(key).to.eql({
+            altKey: false,
+            ctrlKey: false,
+            key: 'S',
+            metaKey: false,
+            shiftKey: true,
+        });
+
+        document.body.removeChild(component);
+    });
+    it('key should not be changed when key-change event is canceled', () => {
+        const component = new OneKey();
+
+        document.body.appendChild(component);
+
+        const currentKey = component.key;
+
+        // key-change listener to always cancel the event.
+        component.addEventListener(
+            'key-change',
+            (e: CustomEvent<IKey>) => {
+                e.preventDefault();
+            },
+            false,
+        );
+
+        // simulate click.
+        const ev = new MouseEvent('click');
+        component.dispatchEvent(ev);
+
+        // simluate Shift+S key.
+        const keyev = new KeyboardEvent('keydown', {
+            bubbles: true,
+            cancelable: true,
+            key: 'S',
+            shiftKey: true,
+        });
+
+        component.dispatchEvent(keyev);
+
+        // Key should not be changed here.
+        expect(component.key).to.eql(currentKey);
 
         document.body.removeChild(component);
     });
