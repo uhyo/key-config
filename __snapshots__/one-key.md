@@ -20,3 +20,13 @@
         "
 ```
 
+#### `Label is shown when clicked`
+
+```
+"
+            <div class=\"wrapper\">
+                <span class=\"key-text\">Hey!</span>
+            </div>
+        "
+```
+

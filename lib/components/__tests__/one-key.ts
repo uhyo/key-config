@@ -57,6 +57,16 @@ describe('one-key', () => {
         };
         expect(component.shadowRoot!.innerHTML).to.matchSnapshot();
     });
+    it('Label is shown when clicked', () => {
+        const component = new OneKey();
+        component.label = 'Hey!';
+
+        // simulate click.
+        const ev = new MouseEvent('click');
+        component.dispatchEvent(ev);
+
+        expect(component.shadowRoot!.innerHTML).to.matchSnapshot();
+    });
 });
 
 /**
