@@ -67,6 +67,53 @@ describe('one-key', () => {
 
         expect(component.shadowRoot!.innerHTML).to.matchSnapshot();
     });
+    it('Shown label is changed when attribute is changed', () => {
+        const component = new OneKey();
+        component.label = 'Hey!';
+
+        // simulate click.
+        const ev = new MouseEvent('click');
+        component.dispatchEvent(ev);
+
+        component.label = 'Hoy!';
+
+        expect(component.shadowRoot!.innerHTML).to.matchSnapshot();
+    });
+    it('Key is rewritten when key is pressed', () => {
+        const component = new OneKey();
+
+        document.body.appendChild(component);
+
+        // simulate click.
+        const ev = new MouseEvent('click');
+        component.dispatchEvent(ev);
+
+        // simluate Shift+S key.
+        const keyev = new KeyboardEvent('keydown', {
+            bubbles: true,
+            cancelable: true,
+            key: 'S',
+            shiftKey: true,
+        });
+
+        const success = component.dispatchEvent(keyev);
+
+        // KeyboardEvent should be canceled.
+        // tslint:disable-next-line: no-unused-expression
+        expect(success).to.be.false;
+
+        expect(component.key).to.eql({
+            altKey: false,
+            ctrlKey: false,
+            key: 'S',
+            metaKey: false,
+            shiftKey: true,
+        });
+
+        expect(component.shadowRoot!.innerHTML).to.matchSnapshot();
+
+        document.body.removeChild(component);
+    });
 });
 
 /**
