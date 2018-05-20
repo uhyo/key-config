@@ -30,6 +30,16 @@
         "
 ```
 
+#### `Click is handles for outer click event`
+
+```
+"
+            <div class=\"wrapper\">
+                <span class=\"key-text\">Hey!</span>
+            </div>
+        "
+```
+
 #### `Shown label is changed when attribute is changed`
 
 ```

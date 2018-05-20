@@ -63,6 +63,21 @@ describe('one-key', () => {
         component.label = 'Hey!';
 
         // simulate click.
+        const ev = new MouseEvent('click', {
+            bubbles: true,
+            composed: true,
+            // `as MouseEventInit` is temporal.
+            // waiting for https://github.com/Microsoft/TSJS-lib-generator/pull/413
+        } as MouseEventInit);
+        component.shadowRoot!.querySelector('.key-text')!.dispatchEvent(ev);
+
+        expect(component.shadowRoot!.innerHTML).to.matchSnapshot();
+    });
+    it('Click is handles for outer click event', () => {
+        const component = new OneKey();
+        component.label = 'Hey!';
+
+        // simulate click.
         const ev = new MouseEvent('click');
         component.dispatchEvent(ev);
 
