@@ -1,5 +1,5 @@
-import { fragment } from '../fragment';
-import { getKey, IKey, keyStringify } from '../key';
+import { fragment } from '../fragment.js';
+import { getKey, IKey, keyStringify } from '../key.js';
 
 /**
  * Config of one key.

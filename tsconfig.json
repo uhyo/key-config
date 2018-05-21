@@ -1,12 +1,8 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "lib": [
-      "dom",
-      "es2017",
-      "dom.iterable"
-    ],
-    "module": "commonjs",
+    "lib": ["dom", "es2017", "dom.iterable"],
+    "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "removeComments": false,
@@ -15,7 +11,5 @@
     "noFallthroughCasesInSwitch": true,
     "strict": true
   },
-  "include": [
-    "lib/**/*.ts"
-  ]
+  "include": ["lib/**/*.ts"]
 }

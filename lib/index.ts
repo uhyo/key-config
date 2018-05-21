@@ -1,2 +1,2 @@
-export { register } from './components/register';
-export { OneKey } from './components/one-key';
+export { register } from './components/register.js';
+export { OneKey } from './components/one-key.js';

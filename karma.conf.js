@@ -87,6 +87,9 @@ module.exports = function(config) {
     },
     // karma-typescript
     karmaTypescriptConfig: {
+      compilerOptions: {
+        module: 'commonjs',
+      },
       coverageOptions: {
         exclude: /__tests__/,
       },
