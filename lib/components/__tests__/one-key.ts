@@ -4,8 +4,9 @@ import { matchSnapshot } from 'chai-karma-snapshot';
 import { IKey } from '../../key';
 import { onekey } from '../name';
 import { OneKey } from '../one-key';
-import '../register';
+import { register } from '../register';
 
+register();
 use(matchSnapshot);
 
 describe('one-key', () => {
