@@ -207,6 +207,92 @@ describe('one-key', () => {
 
         document.body.removeChild(component);
     });
+    it('Modifier keys should not be a result of keyconfig itself', () => {
+        const component = new OneKey();
+
+        document.body.appendChild(component);
+
+        let keyChangeFired = 0;
+
+        // key-change listener to always cancel the event.
+        component.addEventListener(
+            'key-change',
+            (e: CustomEvent<IKey>) => {
+                keyChangeFired++;
+            },
+            false,
+        );
+
+        // simulate click.
+        const ev = new MouseEvent('click');
+        component.dispatchEvent(ev);
+
+        // simluate Shift key.
+        const keyev = new KeyboardEvent('keydown', {
+            bubbles: true,
+            cancelable: true,
+            key: 'Shift',
+            shiftKey: true,
+        });
+
+        component.dispatchEvent(keyev);
+
+        // This should not fire the key-change.
+        expect(keyChangeFired).to.equal(0);
+
+        // simluate Shift+S key.
+        const keyev2 = new KeyboardEvent('keydown', {
+            bubbles: true,
+            cancelable: true,
+            key: 'S',
+            shiftKey: true,
+        });
+        component.dispatchEvent(keyev2);
+
+        expect(keyChangeFired).to.equal(1);
+
+        document.body.removeChild(component);
+    });
+    it('Double-clicking should have no effect', () => {
+        const component = new OneKey();
+
+        document.body.appendChild(component);
+
+        // simulate click twice.
+        const ev = new MouseEvent('click');
+        component.dispatchEvent(ev);
+        const ev2 = new MouseEvent('click');
+        component.dispatchEvent(ev2);
+
+        // simluate Shift+S key.
+        const keyev = new KeyboardEvent('keydown', {
+            bubbles: true,
+            cancelable: true,
+            key: 'S',
+            shiftKey: true,
+        });
+        component.dispatchEvent(keyev);
+
+        // Simulate Shift+A key.
+        const keyev2 = new KeyboardEvent('keydown', {
+            bubbles: true,
+            cancelable: true,
+            key: 'A',
+            shiftKey: true,
+        });
+        component.dispatchEvent(keyev2);
+
+        // First key should be adapted.
+        expect(component.key).to.eql({
+            altKey: false,
+            ctrlKey: false,
+            key: 'S',
+            metaKey: false,
+            shiftKey: true,
+        });
+
+        document.body.removeChild(component);
+    });
 });
 
 /**

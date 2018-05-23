@@ -67,6 +67,9 @@ export function keyStringify({
     if (shiftKey) {
         result += 'Shift+';
     }
-    result += key;
+
+    // some key has special string.
+    const keyStr = key === ' ' ? 'Space' : key;
+    result += keyStr;
     return result;
 }

@@ -27,9 +27,15 @@ export class OneKey extends HTMLElement {
         });
 
         f.appendChild(fragment`
-            <div class='wrapper'>
+            <style>
+                .wrapper {
+                    display: inline-block;
+                    padding: 0.8em;
+                }
+            </style>
+            <button class='wrapper'>
                 <span class='key-text'></span>
-            </div>
+            </button>
         `);
 
         this.wrapper = f.querySelector('.wrapper') as HTMLElement;
@@ -59,6 +65,10 @@ export class OneKey extends HTMLElement {
                 this.keyText.textContent = this.label;
 
                 const keydownHandler = (ke: KeyboardEvent) => {
+                    // If the pressed key is a modifier, do not 確定 the input key.
+                    if (['Alt', 'Control', 'Meta', 'Shift'].includes(ke.key)) {
+                        return;
+                    }
                     // Move back to the waiting state.
                     this.waiting = false;
                     ke.preventDefault();

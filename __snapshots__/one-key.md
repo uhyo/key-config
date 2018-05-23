@@ -4,9 +4,15 @@
 
 ```
 "
-            <div class=\"wrapper\">
+            <style>
+                .wrapper {
+                    display: inline-block;
+                    padding: 0.8em;
+                }
+            </style>
+            <button class=\"wrapper\">
                 <span class=\"key-text\"></span>
-            </div>
+            </button>
         "
 ```
 
@@ -14,9 +20,15 @@
 
 ```
 "
-            <div class=\"wrapper\">
+            <style>
+                .wrapper {
+                    display: inline-block;
+                    padding: 0.8em;
+                }
+            </style>
+            <button class=\"wrapper\">
                 <span class=\"key-text\">Ctrl+Shift+A</span>
-            </div>
+            </button>
         "
 ```
 
@@ -24,9 +36,15 @@
 
 ```
 "
-            <div class=\"wrapper\">
+            <style>
+                .wrapper {
+                    display: inline-block;
+                    padding: 0.8em;
+                }
+            </style>
+            <button class=\"wrapper\">
                 <span class=\"key-text\">Hey!</span>
-            </div>
+            </button>
         "
 ```
 
@@ -34,9 +52,15 @@
 
 ```
 "
-            <div class=\"wrapper\">
+            <style>
+                .wrapper {
+                    display: inline-block;
+                    padding: 0.8em;
+                }
+            </style>
+            <button class=\"wrapper\">
                 <span class=\"key-text\">Hey!</span>
-            </div>
+            </button>
         "
 ```
 
@@ -44,9 +68,15 @@
 
 ```
 "
-            <div class=\"wrapper\">
+            <style>
+                .wrapper {
+                    display: inline-block;
+                    padding: 0.8em;
+                }
+            </style>
+            <button class=\"wrapper\">
                 <span class=\"key-text\">Hoy!</span>
-            </div>
+            </button>
         "
 ```
 
@@ -54,9 +84,15 @@
 
 ```
 "
-            <div class=\"wrapper\">
+            <style>
+                .wrapper {
+                    display: inline-block;
+                    padding: 0.8em;
+                }
+            </style>
+            <button class=\"wrapper\">
                 <span class=\"key-text\">Shift+S</span>
-            </div>
+            </button>
         "
 ```
 
