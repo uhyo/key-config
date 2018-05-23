@@ -69,7 +69,8 @@ export function keyStringify({
     }
 
     // some key has special string.
-    const keyStr = key === ' ' ? 'Space' : key;
+    const keyStr =
+        key === ' ' ? 'Space' : /^[a-z]$/.test(key) ? key.toUpperCase() : key;
     result += keyStr;
     return result;
 }
