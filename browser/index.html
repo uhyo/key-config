@@ -6,6 +6,8 @@
   </head>
   <body>
     <p>kc-one: <kc-one id="key1" label="キーを入力してください"></kc-one></p>
+    <p>kc-table:</p>
+    <kc-table id="table" label="キーを入力してください"></kc-table>
     <script type="module">
       import { register } from '../dist/index.js';
       console.log(register);
@@ -14,6 +16,25 @@
       document.getElementById('key1').key = {
         key: 'A',
       };
+      const table = document.getElementById('table');
+      table.setSpec([
+        {
+          id: 'foo',
+          name: 'Foo shortcut',
+        },
+        {
+          id: 'bar',
+          name: 'Bar',
+        },
+      ]);
+      table.setKey('foo', {
+        shiftKey: true,
+        key: 'F',
+      });
+      table.setKey('bar', {
+        ctrlKey: true,
+        key: 'b',
+      });
     </script>
   </body>
 </html>
