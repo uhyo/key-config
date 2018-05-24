@@ -1,5 +1,6 @@
 import { fragment } from '../fragment.js';
 import { getKey, IKey, keyStringify } from '../key.js';
+import { IKeyChangeDetail } from './event.js';
 
 /**
  * Config of one key.
@@ -79,7 +80,10 @@ export class OneKey extends HTMLElement {
                         new CustomEvent('key-change', {
                             bubbles: true,
                             cancelable: true,
-                            detail: key,
+                            detail: {
+                                key,
+                                keyid: this.getAttribute('keyid'),
+                            },
                         }),
                     );
                     if (evSuccess) {
@@ -140,7 +144,7 @@ export interface OneKey {
     ): void;
     addEventListener(
         type: 'key-change',
-        listener: (this: OneKey, ev: CustomEvent<IKey>) => any,
+        listener: (this: OneKey, ev: CustomEvent<IKeyChangeDetail>) => any,
         options?: boolean | AddEventListenerOptions,
     ): void;
     addEventListener(

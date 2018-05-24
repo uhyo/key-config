@@ -2,6 +2,7 @@ import { expect, use } from 'chai';
 import { matchSnapshot } from 'chai-karma-snapshot';
 
 import { IKey } from '../../key';
+import { IKeyChangeDetail } from '../event';
 import { onekey } from '../name';
 import { OneKey } from '../one-key';
 import { register } from '../register';
@@ -141,8 +142,8 @@ describe('one-key', () => {
         // add change listener.
         component.addEventListener(
             'key-change',
-            (e: CustomEvent<IKey>) => {
-                key = e.detail;
+            (e: CustomEvent<IKeyChangeDetail>) => {
+                key = e.detail.key;
             },
             false,
         );
@@ -182,7 +183,7 @@ describe('one-key', () => {
         // key-change listener to always cancel the event.
         component.addEventListener(
             'key-change',
-            (e: CustomEvent<IKey>) => {
+            (e: CustomEvent<IKeyChangeDetail>) => {
                 e.preventDefault();
             },
             false,
@@ -217,7 +218,7 @@ describe('one-key', () => {
         // key-change listener to always cancel the event.
         component.addEventListener(
             'key-change',
-            (e: CustomEvent<IKey>) => {
+            (e: CustomEvent<IKeyChangeDetail>) => {
                 keyChangeFired++;
             },
             false,
