@@ -45,12 +45,12 @@ export class KeyConfig extends HTMLElement {
         store: IKeyConfigStore,
         spec: KeyConfigSpec,
         defaultKeys?: Record<string, IKey>,
-    ) {
+    ): Promise<void> {
         this.store = store;
         this.spec = spec;
         this.defaultKeys = defaultKeys || {};
         this.table.setSpec(spec);
-        this.loadKeySetting();
+        return this.loadKeySetting();
     }
     public attributeChangedCallback(name: string, _: string, newValue: string) {
         if (name === 'label') {
@@ -58,12 +58,9 @@ export class KeyConfig extends HTMLElement {
             this.table.label = newValue;
         }
     }
-    protected loadKeySetting() {
-        if (this.store == null) {
-            return;
-        }
+    protected loadKeySetting(): Promise<void> {
         const keyids = this.spec.map(({ id }) => id);
-        this.store.get(keyids).then((result: any) => {
+        return this.store!.get(keyids).then((result: any) => {
             // Set value of each key.
             for (const { id } of this.spec) {
                 this.table.setKey(
@@ -82,11 +79,4 @@ export class KeyConfig extends HTMLElement {
     set label(value: string) {
         this.setAttribute('label', value);
     }
-}
-
-/**
- * Get a storage key from prefix and id.
- */
-function getStorageKey(prefix: string, id: string): string {
-    return `${prefix}-${id}`;
 }
