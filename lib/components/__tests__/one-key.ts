@@ -49,6 +49,21 @@ describe('one-key', () => {
         component.key = obj;
         expect(component.key).not.to.equal(obj);
     });
+    it('key property is consistent', () => {
+        const component = new OneKey();
+        const obj = {
+            altKey: false,
+            ctrlKey: true,
+            key: 'A',
+            metaKey: false,
+            shiftKey: true,
+        };
+        component.key = obj;
+
+        const key1 = component.key;
+        const key2 = component.key;
+        expect(key1).to.equal(key2);
+    });
     it('Label is changed when key is set', () => {
         const component = new OneKey();
         component.key = {

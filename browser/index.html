@@ -8,8 +8,13 @@
     <p>kc-one: <kc-one id="key1" label="キーを入力してください"></kc-one></p>
     <p>kc-table:</p>
     <kc-table id="table" label="キーを入力してください"></kc-table>
+
+    <p>kc-keyconfig:</p>
+    <kc-keyconfig id="keyconfig" label="キーを入力してください"></kc-keyconfig>
+
     <script type="module">
       import { register } from '../dist/index.js';
+      import { LocalStorageStore } from '../dist/stores/local-storage.js';
       console.log(register);
       register();
       // Set initial key
@@ -34,6 +39,28 @@
       table.setKey('bar', {
         ctrlKey: true,
         key: 'b',
+      });
+
+      const keyconfig = document.getElementById('keyconfig');
+      const store = new LocalStorageStore('keyconfig');
+      keyconfig.connect(store, [
+        {
+          id: 'foo',
+          name: 'Foo shortcut',
+        },
+        {
+          id: 'bar',
+          name: 'Bar',
+        },
+      ], {
+        foo: {
+          shiftKey: true,
+          key: 'F',
+        },
+        bar: {
+          ctrlKey: true,
+          key: 'b',
+        },
       });
     </script>
   </body>

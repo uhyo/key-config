@@ -80,11 +80,12 @@ export class OneKey extends HTMLElement {
                         new CustomEvent('key-change', {
                             bubbles: true,
                             cancelable: true,
+                            composed: true,
                             detail: {
                                 key,
                                 keyid: this.getAttribute('keyid'),
                             },
-                        }),
+                        } as CustomEventInit<IKeyChangeDetail>),
                     );
                     if (evSuccess) {
                         // update my key.

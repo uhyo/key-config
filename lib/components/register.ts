@@ -1,7 +1,8 @@
 // Register custom elements.
 
-import { keytable, onekey } from './name.js';
+import { keyconfig, keytable, onekey } from './name.js';
 
+import { ChromeKeyConfig } from './key-config.js';
 import { KeyConfigTable } from './key-table.js';
 import { OneKey } from './one-key.js';
 
@@ -19,6 +20,7 @@ export function register(): void {
     }
     customElements.define(onekey, OneKey);
     customElements.define(keytable, KeyConfigTable);
+    customElements.define(keyconfig, ChromeKeyConfig);
 
     registered = true;
 }

@@ -1,3 +1,4 @@
+import { IKey } from './key.js';
 /**
  * Specification of one shortcut command.
  */
@@ -16,3 +17,17 @@ export interface IOneKeySpec {
  * Specification of all shortcut commands.
  */
 export type KeyConfigSpec = IOneKeySpec[];
+
+/**
+ * Store of key config.
+ */
+export interface IKeyConfigStore {
+    /**
+     * Load Setting of given key.
+     */
+    get(keyids: string[]): Promise<Record<string, IKey | undefined>>;
+    /**
+     * Save given key setting.
+     */
+    set(keyid: string, key: IKey): Promise<void>;
+}
