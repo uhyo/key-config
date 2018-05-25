@@ -7,7 +7,7 @@ import { KeyConfigTable } from './key-table.js';
 /**
  * Key Config for Chrome extension.
  */
-export class ChromeKeyConfig extends HTMLElement {
+export class KeyConfig extends HTMLElement {
     private table: KeyConfigTable;
     private spec: KeyConfigSpec = [];
     private defaultKeys: Record<string, IKey> = {};
