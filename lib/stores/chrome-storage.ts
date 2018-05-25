@@ -4,7 +4,7 @@ import { IKeyConfigStore } from '../spec.js';
 /**
  * Store using chrome.storage.sync
  */
-export class ChromeStoeageStore implements IKeyConfigStore {
+export class ChromeStorageStore implements IKeyConfigStore {
     /**
      * Prefix of storage key.
      */
