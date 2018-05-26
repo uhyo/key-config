@@ -34,4 +34,9 @@ export interface IKeyConfigStore {
      * Save given key setting.
      */
     set(keyid: string, key: IKey): Promise<void>;
+    /**
+     * Listen to changes to the store.
+     * @returns Function to unlisten.
+     */
+    listen(callback: (keyid: string, key: IKey | null) => void): (() => void);
 }

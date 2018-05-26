@@ -28,4 +28,25 @@ export class ChromeStorageStore implements IKeyConfigStore {
             chrome.storage.sync.set({ [keyid]: key }, resolve);
         });
     }
+    public listen(
+        callback: ((keyid: string, key: IKey | null) => void),
+    ): (() => void) {
+        const storageHandler = (
+            changes: Record<string, any>,
+            areaName: string,
+        ) => {
+            if (areaName !== 'sync') {
+                return;
+            }
+            for (const keyid of Object.keys(changes)) {
+                const change = changes[keyid];
+                const key = change.newValue || null;
+                callback(keyid, key);
+            }
+        };
+        chrome.storage.onChanged.addListener(storageHandler);
+        const unlisten = () =>
+            chrome.storage.onChanged.removeListener(storageHandler);
+        return unlisten;
+    }
 }
