@@ -1,5 +1,5 @@
 import { fragment } from '../fragment.js';
-import { IKey } from '../key.js';
+import { addKeyDefault, IKey } from '../key.js';
 import { IKeyConfigStore, KeyConfigSpec } from '../spec.js';
 import { IKeyChangeDetail } from './event.js';
 import { KeyConfigTable } from './key-table.js';
@@ -10,7 +10,6 @@ import { KeyConfigTable } from './key-table.js';
 export class KeyConfig extends HTMLElement {
     private table: KeyConfigTable;
     private spec: KeyConfigSpec = [];
-    private defaultKeys: Record<string, IKey> = {};
     private store: IKeyConfigStore | null = null;
     static get observedAttributes() {
         return ['label'];
@@ -41,14 +40,9 @@ export class KeyConfig extends HTMLElement {
             false,
         );
     }
-    public connect(
-        store: IKeyConfigStore,
-        spec: KeyConfigSpec,
-        defaultKeys?: Record<string, IKey>,
-    ): Promise<void> {
+    public connect(store: IKeyConfigStore, spec: KeyConfigSpec): Promise<void> {
         this.store = store;
         this.spec = spec;
-        this.defaultKeys = defaultKeys || {};
         this.table.setSpec(spec);
         return this.loadKeySetting();
     }
@@ -62,11 +56,9 @@ export class KeyConfig extends HTMLElement {
         const keyids = this.spec.map(({ id }) => id);
         return this.store!.get(keyids).then((result: any) => {
             // Set value of each key.
-            for (const { id } of this.spec) {
-                this.table.setKey(
-                    id,
-                    result[id] || this.defaultKeys[id] || { key: '' },
-                );
+            for (const { id, default: df } of this.spec) {
+                const k = result[id] || addKeyDefault(df || {});
+                this.table.setKey(id, k);
             }
         });
     }

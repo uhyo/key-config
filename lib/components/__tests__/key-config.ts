@@ -29,6 +29,10 @@ describe('key-config', () => {
         return component
             .connect(store, [
                 {
+                    default: {
+                        ctrlKey: false,
+                        key: 's',
+                    },
                     id: 'foo',
                     name: 'Foooo',
                 },
@@ -104,13 +108,17 @@ class TestStore {
         this.log.push(`get ${keyids}`);
         const result: any = {};
         for (const id of keyids) {
-            result[id] = {
-                altKey: false,
-                ctrlKey: false,
-                key: 'w',
-                metaKey: false,
-                shiftKey: false,
-            };
+            if (id === 'foo') {
+                result[id] = undefined;
+            } else {
+                result[id] = {
+                    altKey: false,
+                    ctrlKey: false,
+                    key: 'w',
+                    metaKey: false,
+                    shiftKey: false,
+                };
+            }
         }
         return Promise.resolve(result);
     }

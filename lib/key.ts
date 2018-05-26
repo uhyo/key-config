@@ -35,10 +35,12 @@ export function getKey({
     altKey,
     metaKey,
 }: KeyboardEvent): IKey {
+    // Convert single alphabet string to uppercase one.
+    const keyStr = /^[a-z]$/.test(key) ? key.toUpperCase() : key;
     return {
         altKey,
         ctrlKey,
-        key,
+        key: keyStr,
         metaKey,
         shiftKey,
     };
@@ -69,8 +71,21 @@ export function keyStringify({
     }
 
     // some key has special string.
-    const keyStr =
-        key === ' ' ? 'Space' : /^[a-z]$/.test(key) ? key.toUpperCase() : key;
+    const keyStr = key === ' ' ? 'Space' : key;
     result += keyStr;
     return result;
+}
+
+/**
+ * Add default values to partial IKey.
+ */
+export function addKeyDefault(key: Partial<IKey>): IKey {
+    return {
+        altKey: false,
+        ctrlKey: false,
+        key: '',
+        metaKey: false,
+        shiftKey: false,
+        ...key,
+    };
 }

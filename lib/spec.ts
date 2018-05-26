@@ -11,6 +11,10 @@ export interface IOneKeySpec {
      * Displayed name of this shortcut command.
      */
     name: string;
+    /**
+     * Default setting of keyboard shortcut.
+     */
+    default?: Partial<IKey>;
 }
 
 /**
