@@ -1,6 +1,6 @@
 {
   "name": "my-key-config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "My UI written with Web Components for key config for me.",
   "homepage": "",
   "author": {
@@ -8,7 +8,7 @@
     "email": "uhyo@uhy.ooo",
     "url": ""
   },
-  "files": ["lib"],
+  "files": ["dist/", "dist-typing/"],
   "main": "dist/index.js",
   "typings": "dist-typing/index.d.ts",
   "keywords": ["keyconfig"],
