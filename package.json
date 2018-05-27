@@ -1,7 +1,7 @@
 {
-  "name": "key-config",
+  "name": "my-key-config",
   "version": "0.1.0",
-  "description": "A UI written with Web Components for key config.",
+  "description": "My UI written with Web Components for key config for me.",
   "homepage": "",
   "author": {
     "name": "uhyo",

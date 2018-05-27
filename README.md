@@ -1,10 +1,10 @@
-# key-config [![NPM version][npm-image]][npm-url]
-> A UI written with Web Components for key config.
+# my-key-config [![NPM version][npm-image]][npm-url]
+> My UI written with Web Components for key config for me.
 
 ## Installation
 
 ```sh
-$ npm install key-config
+$ npm install my-key-config
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ import {
   register,
   LocalStorageStore,
   ChromeStorageStore,
-} from 'key-config';
+} from 'my-key-config';
 
 // Register the custom elements defined by key-config.
 register();
@@ -69,7 +69,7 @@ kc.connect(store, spec);
 import {
   LocalStorageStore,
   KeyListener,
-} from 'key-config';
+} from 'my-key-config';
 
 // Initialize the store.
 const store = new LocalStorageStore('prefix');
@@ -121,5 +121,5 @@ listener.addEventListener('key', (event)=> {
 MIT © [uhyo]()
 
 
-[npm-image]: https://badge.fury.io/js/key-config.svg
-[npm-url]: https://npmjs.org/package/key-config
+[npm-image]: https://badge.fury.io/js/my-key-config.svg
+[npm-url]: https://npmjs.org/package/my-key-config
