@@ -63,6 +63,59 @@ const kc = document.querySelector('kc-keyconfig');
 
 kc.connect(store, spec);
 ```
+
+### Listen to key shortcuts
+```js
+import {
+  LocalStorageStore,
+  KeyListener,
+} from 'key-config';
+
+// Initialize the store.
+const store = new LocalStorageStore('prefix');
+
+// Also spec.
+const spec = [
+  {
+    id: 'save',
+    name: 'Save to File',
+    // Default config (optional; no shortcut if not specified)
+    default: {
+      key: 'S',
+      shiftKey: false,
+      ctrlKey: true,
+      altKey: false,
+      metaKey: false,
+    },
+  },
+  {
+    id: 'quit',
+    name: 'Quit',
+    default: {
+      key: 'Q',
+      shiftKey: false,
+      ctrlKey: true,
+      altKey: false,
+      metaKey: false,
+    },
+  },
+];
+
+// Initialize KeyListener with store and spec.
+const listener = new KeyListener(store, spec);
+
+// Start listening to the 'keydown' event.
+listener.listen();
+
+// KeyListener implements the EventTarget API.
+listener.addEventListener('key', (event)=> {
+  if (event.detail === 'save') {
+    console.log('Perform save command');
+  }
+});
+
+```
+
 ## License
 
 MIT © [uhyo]()
