@@ -1,5 +1,6 @@
 import { fragment } from '../fragment.js';
-import { addKeyDefault, IKey } from '../key.js';
+import { IKey } from '../key.js';
+import { loadKeySettings } from '../load.js';
 import { IKeyConfigStore, KeyConfigSpec } from '../spec.js';
 import { IKeyChangeDetail } from './event.js';
 import { KeyConfigTable } from './key-table.js';
@@ -53,12 +54,9 @@ export class KeyConfig extends HTMLElement {
         }
     }
     protected loadKeySetting(): Promise<void> {
-        const keyids = this.spec.map(({ id }) => id);
-        return this.store!.get(keyids).then((result: any) => {
-            // Set value of each key.
-            for (const { id, default: df } of this.spec) {
-                const k = result[id] || addKeyDefault(df || {});
-                this.table.setKey(id, k);
+        return loadKeySettings(this.store!, this.spec).then(keys => {
+            for (const key of Object.keys(keys)) {
+                this.table.setKey(key, keys[key]);
             }
         });
     }

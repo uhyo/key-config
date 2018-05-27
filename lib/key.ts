@@ -28,22 +28,40 @@ export interface IKey {
 /**
  * Extract an IKey from a KeyboardEvent.
  */
-export function getKey({
-    key,
-    shiftKey,
-    ctrlKey,
-    altKey,
-    metaKey,
-}: KeyboardEvent): IKey {
+export function getKey(ke: KeyboardEvent): IKey {
+    const dest: any = {};
+    getKeyDestructive(ke, dest);
+    return dest;
+}
+
+/**
+ * Extract key information from KeyboardEvent and
+ * write to the passed object.
+ */
+export function getKeyDestructive(
+    { key, shiftKey, ctrlKey, altKey, metaKey }: KeyboardEvent,
+    dest: IKey,
+): void {
     // Convert single alphabet string to uppercase one.
     const keyStr = /^[a-z]$/.test(key) ? key.toUpperCase() : key;
-    return {
-        altKey,
-        ctrlKey,
-        key: keyStr,
-        metaKey,
-        shiftKey,
-    };
+    dest.altKey = altKey;
+    dest.ctrlKey = ctrlKey;
+    dest.key = keyStr;
+    dest.metaKey = metaKey;
+    dest.shiftKey = shiftKey;
+}
+
+/**
+ * Check equality of IKey.
+ */
+export function keyEqual(left: IKey, right: IKey): boolean {
+    return (
+        left.altKey === right.altKey &&
+        left.ctrlKey === right.ctrlKey &&
+        left.key === right.key &&
+        left.metaKey === right.metaKey &&
+        left.shiftKey === right.shiftKey
+    );
 }
 
 /**

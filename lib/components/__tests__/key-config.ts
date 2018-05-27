@@ -126,4 +126,10 @@ class TestStore {
         this.log.push(`set ${keyid} ${JSON.stringify(key)}`);
         return Promise.resolve();
     }
+    public listen(): (() => void) {
+        // Listen is just noop here.
+        return () => {
+            /* noop */
+        };
+    }
 }
