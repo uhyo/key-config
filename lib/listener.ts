@@ -6,6 +6,10 @@ import { IKeyConfigStore, KeyConfigSpec } from './spec.js';
  * Object which listens 'keydown' event
  */
 export class KeyListener extends EventTarget {
+    /**
+     * Legacy style handler of key event.
+     */
+    public onkey: ((e: CustomEvent<string>) => void) | undefined;
     private keys: Record<string, IKey> = {};
     private unlistenFunction: (() => void) | null = null;
     private keyDest: IKey = {
@@ -76,6 +80,9 @@ export class KeyListener extends EventTarget {
                 detail: keyid,
             });
             this.dispatchEvent(ce);
+            if (this.onkey != null) {
+                this.onkey(ce);
+            }
         }
     }
 }
