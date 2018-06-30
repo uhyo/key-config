@@ -113,6 +113,8 @@ listener.addEventListener('key', (event)=> {
     console.log('Perform save command');
   }
 });
+// `onkey` property can also be used
+// listener.onkey = (event)=> console.log('hi');
 
 ```
 
