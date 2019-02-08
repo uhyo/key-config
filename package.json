@@ -8,14 +8,19 @@
     "email": "uhyo@uhy.ooo",
     "url": ""
   },
-  "files": ["dist/", "dist-typing/"],
+  "files": [
+    "dist/",
+    "dist-typing/"
+  ],
   "main": "dist/index.js",
   "typings": "dist-typing/index.d.ts",
-  "keywords": ["keyconfig"],
+  "keywords": [
+    "keyconfig"
+  ],
   "devDependencies": {
-    "@types/chai": "^4.1.3",
-    "@types/mocha": "^5.2.0",
-    "chai": "^4.1.2",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.2.0",
     "chai-karma-snapshot": "^0.7.0",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
@@ -23,9 +28,9 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-tslint": "^8.1.3",
     "gulp-typescript": "^4.0.2",
-    "gulp-uglify": "^3.0.0",
+    "gulp-uglify": "^3.0.1",
     "husky": "^0.14.3",
-    "karma": "^2.0.2",
+    "karma": "^2.0.5",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.2",
@@ -33,17 +38,17 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-mocha-snapshot": "^0.2.1",
     "karma-snapshot": "^0.6.0",
-    "karma-typescript": "^3.0.12",
-    "lint-staged": "^7.1.0",
-    "merge2": "^1.2.2",
-    "mocha": "^5.1.1",
+    "karma-typescript": "^3.0.13",
+    "lint-staged": "^7.3.0",
+    "merge2": "^1.2.3",
+    "mocha": "^5.2.0",
     "nsp": "^3.2.1",
-    "prettier": "^1.12.1",
+    "prettier": "^1.16.4",
     "rollup": "^0.58.2",
     "rollup-stream": "^1.23.1",
-    "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.13.0",
-    "typescript": "^2.9.0-rc",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^2.9.2",
     "uglify-es": "^3.3.10",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
@@ -57,9 +62,18 @@
     "test-watch": "karma start --auto-watch --no-single-run"
   },
   "lint-staged": {
-    "*.ts": ["tslint --fix", "git add"],
-    "*.tsx": ["tslint --fix", "git add"],
-    "*.json": ["prettier --write", "git add"]
+    "*.ts": [
+      "tslint --fix",
+      "git add"
+    ],
+    "*.tsx": [
+      "tslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": "uhyo/key-config",
   "license": "MIT",
